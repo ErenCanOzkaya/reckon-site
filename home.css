@@ -118,6 +118,28 @@ body.home footer { animation: none; }
   color: var(--ink-tertiary);
   letter-spacing: 0;
 }
+/* Coming-soon badge — shown in place of the App Store button before launch */
+.coming-soon {
+  display: inline-flex;
+  align-items: center;
+  gap: 11px;
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--ink-primary);
+  background: var(--surface);
+  border: 1px dashed var(--hairline);
+  padding: 16px 28px;
+  border-radius: 14px;
+  letter-spacing: -0.01em;
+}
+.coming-soon::before {
+  content: "";
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--accent-red);
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--accent-red) 22%, transparent);
+}
 
 /* ---------- Hero ---------- */
 .hero-section { padding: 64px 0 40px; }
