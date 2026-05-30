@@ -1,0 +1,314 @@
+/* Reckon — landing page styles
+   Extends style.css (same tokens). Scoped to body.home so the
+   support/privacy pages are untouched. A little tasteful JS only:
+   theme toggle + scroll reveals. No external fonts. No tracking. */
+
+/* Manual theme override (set by the toggle; otherwise prefers-color-scheme wins) */
+html[data-theme="light"] {
+  --bg-canvas: #ECEDEF;
+  --surface: #F4F5F6;
+  --ink-primary: #1A1D21;
+  --ink-secondary: rgba(26, 29, 33, 0.6);
+  --ink-tertiary: rgba(26, 29, 33, 0.35);
+  --accent-green: #4A7A5E;
+  --accent-amber: #D4924A;
+  --accent-red: #B04545;
+  --hairline: rgba(26, 29, 33, 0.12);
+  --card-border: rgba(26, 29, 33, 0.08);
+  --shadow: 0 1px 2px rgba(26, 29, 33, 0.04), 0 10px 30px rgba(26, 29, 33, 0.05);
+}
+html[data-theme="dark"] {
+  --bg-canvas: #161718;
+  --surface: #1E2022;
+  --ink-primary: #ECEDEF;
+  --ink-secondary: rgba(236, 237, 239, 0.7);
+  --ink-tertiary: rgba(236, 237, 239, 0.4);
+  --accent-green: #5A8A6E;
+  --accent-amber: #E0A55E;
+  --accent-red: #C45757;
+  --hairline: rgba(236, 237, 239, 0.12);
+  --card-border: rgba(236, 237, 239, 0.08);
+  --shadow: none;
+}
+/* amber token for light system default (style.css predates it) */
+:root { --accent-amber: #D4924A; }
+@media (prefers-color-scheme: dark) { :root { --accent-amber: #E0A55E; } }
+
+html { scroll-behavior: smooth; }
+
+body.home {
+  /* the landing wants more room than the 680px text pages */
+  overflow-x: hidden;
+}
+
+.container {
+  max-width: 1040px;
+  margin: 0 auto;
+  padding: 0 32px;
+}
+
+/* Kill the style.css on-load rise; the landing reveals on scroll instead */
+body.home .topbar,
+body.home .hero,
+body.home section,
+body.home footer { animation: none; }
+
+/* ---------- Header / nav ---------- */
+.site-head {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: var(--bg-canvas);
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.3s ease;
+}
+.site-head.scrolled { border-bottom-color: var(--hairline); }
+.nav {
+  max-width: 1040px;
+  margin: 0 auto;
+  padding: 18px 32px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+.nav .wordmark { font-size: 18px; font-weight: 600; letter-spacing: -0.01em; }
+.nav-right { display: flex; align-items: center; gap: 22px; }
+.nav-link {
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--ink-secondary);
+  letter-spacing: -0.005em;
+}
+.nav-link:hover { color: var(--ink-primary); text-decoration: none; }
+.theme-toggle {
+  width: 38px; height: 38px;
+  display: inline-flex; align-items: center; justify-content: center;
+  border: 1px solid var(--card-border);
+  border-radius: 10px;
+  background: var(--surface);
+  color: var(--ink-secondary);
+  cursor: pointer;
+  padding: 0;
+  transition: color 0.2s ease, border-color 0.2s ease;
+}
+.theme-toggle:hover { color: var(--ink-primary); border-color: var(--hairline); }
+.theme-toggle svg { display: block; }
+
+/* ---------- App Store button ---------- */
+.btn-appstore {
+  display: inline-flex;
+  align-items: center;
+  gap: 11px;
+  background: var(--ink-primary);
+  color: var(--bg-canvas);
+  padding: 16px 30px;
+  border-radius: 14px;
+  font-size: 17px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  text-decoration: none;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+.btn-appstore:hover { text-decoration: none; transform: translateY(-2px); opacity: 0.92; }
+.btn-appstore svg { flex: 0 0 auto; }
+.btn-note {
+  margin: 16px 0 0;
+  font-size: 14px;
+  color: var(--ink-tertiary);
+  letter-spacing: 0;
+}
+
+/* ---------- Hero ---------- */
+.hero-section { padding: 64px 0 40px; }
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1.05fr 0.95fr;
+  align-items: center;
+  gap: 56px;
+}
+.hero-copy h1 {
+  font-size: clamp(44px, 6.4vw, 76px);
+  font-weight: 700;
+  line-height: 0.98;
+  letter-spacing: -0.035em;
+  margin: 0;
+  text-wrap: balance;
+}
+.hero-copy .lede {
+  font-size: 20px;
+  line-height: 1.5;
+  color: var(--ink-secondary);
+  margin: 26px 0 0;
+  max-width: 30ch;
+  text-wrap: pretty;
+}
+.hero-cta { margin-top: 34px; }
+.hero-phone { display: flex; justify-content: center; }
+
+/* phone artwork */
+.phone {
+  width: 100%;
+  max-width: 320px;
+  height: auto;
+  display: block;
+  filter: drop-shadow(0 30px 60px rgba(26, 29, 33, 0.16));
+}
+html[data-theme="dark"] .phone,
+:root .phone { /* fallback */ }
+@media (prefers-color-scheme: dark) {
+  .phone { filter: drop-shadow(0 30px 60px rgba(0, 0, 0, 0.5)); }
+}
+html[data-theme="dark"] .phone { filter: drop-shadow(0 30px 60px rgba(0, 0, 0, 0.5)); }
+html[data-theme="light"] .phone { filter: drop-shadow(0 30px 60px rgba(26, 29, 33, 0.16)); }
+
+/* ---------- Feature rows ---------- */
+.feature {
+  padding: 72px 0;
+}
+.feature .container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: 64px;
+}
+.feature + .feature { border-top: 1px solid var(--hairline); }
+.feature.flip .feature-art { order: 2; }
+.feature-art { display: flex; justify-content: center; }
+.feature-art .phone { max-width: 300px; }
+.feature h2 {
+  font-size: clamp(30px, 4vw, 40px);
+  font-weight: 600;
+  line-height: 1.06;
+  letter-spacing: -0.025em;
+  margin: 0;
+  text-wrap: balance;
+}
+.feature p {
+  font-size: 18px;
+  line-height: 1.55;
+  color: var(--ink-secondary);
+  margin: 20px 0 0;
+  max-width: 42ch;
+}
+
+/* color legend (in the grid feature) */
+.legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 22px;
+  margin: 28px 0 0;
+  padding: 0;
+  list-style: none;
+}
+.legend li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--ink-secondary);
+  margin: 0;
+}
+.swatch {
+  width: 16px; height: 16px;
+  border-radius: 5px;
+  flex: 0 0 auto;
+}
+.swatch.green { background: var(--accent-green); }
+.swatch.amber { background: var(--accent-amber); }
+.swatch.red { background: var(--accent-red); }
+
+/* ---------- Manifesto ---------- */
+.manifesto {
+  padding: 104px 0;
+  border-top: 1px solid var(--hairline);
+}
+.manifesto h2 {
+  font-size: clamp(48px, 10vw, 116px);
+  font-weight: 800;
+  line-height: 1.0;
+  letter-spacing: -0.045em;
+  margin: 0;
+}
+.manifesto .fine {
+  margin: 44px 0 0;
+}
+.manifesto .fine p {
+  font-size: 20px;
+  font-weight: 400;
+  color: var(--ink-secondary);
+  margin: 0 0 8px;
+  letter-spacing: -0.01em;
+}
+
+/* ---------- Final CTA ---------- */
+.cta {
+  padding: 96px 0 40px;
+  border-top: 1px solid var(--hairline);
+  text-align: center;
+}
+.cta h2 {
+  font-size: clamp(34px, 5vw, 52px);
+  font-weight: 700;
+  line-height: 1.04;
+  letter-spacing: -0.03em;
+  margin: 0 auto;
+  max-width: 18ch;
+  text-wrap: balance;
+}
+.cta p.cta-sub {
+  font-size: 19px;
+  color: var(--ink-secondary);
+  margin: 22px auto 0;
+  max-width: 36ch;
+}
+.cta .hero-cta { margin-top: 38px; }
+
+/* footer reuse from style.css but center it on the landing */
+body.home footer {
+  text-align: center;
+  max-width: 1040px;
+  margin: 64px auto 64px;
+  padding: 28px 32px 0;
+}
+
+/* ---------- Scroll reveal (progressive enhancement) ----------
+   JS hides ONLY below-the-fold elements (.pre) and removes that class as they
+   scroll into view. Above-the-fold content is never hidden, and with JS off
+   nothing is hidden at all — the page never depends on scripts to render. */
+@media (prefers-reduced-motion: no-preference) {
+  html.js .reveal {
+    transition: opacity 0.7s cubic-bezier(0.22, 0.61, 0.36, 1),
+                transform 0.7s cubic-bezier(0.22, 0.61, 0.36, 1);
+  }
+  html.js .reveal.pre {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 860px) {
+  .hero-grid { grid-template-columns: 1fr; gap: 40px; text-align: center; }
+  .hero-copy .lede { margin-left: auto; margin-right: auto; }
+  .hero-phone { order: -1; }
+  .feature .container { grid-template-columns: 1fr; gap: 36px; text-align: center; }
+  .feature { padding: 60px 0; }
+  .feature.flip .feature-art { order: -1; }
+  .feature-art { order: -1; }
+  .feature p { margin-left: auto; margin-right: auto; }
+  .legend { justify-content: center; }
+}
+
+@media (max-width: 480px) {
+  .container { padding: 0 22px; }
+  .nav { padding: 16px 22px; }
+  .nav-right { gap: 16px; }
+  .hero-section { padding: 40px 0 24px; }
+  .hero-copy h1 { font-size: 40px; }
+  .phone { max-width: 264px; }
+  .feature-art .phone { max-width: 248px; }
+  .manifesto { padding: 76px 0; }
+  .manifesto .fine p { font-size: 18px; }
+}
