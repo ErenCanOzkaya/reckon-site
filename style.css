@@ -1,0 +1,286 @@
+/* Reckon — shared stylesheet
+   No JavaScript. No external fonts. No tracking.
+   Matches the app: flat dark canvas, refined system type, sparing cards. */
+
+:root {
+  --bg-canvas: #ECEDEF;
+  --surface: #F4F5F6;
+  --ink-primary: #1A1D21;
+  --ink-secondary: rgba(26, 29, 33, 0.6);
+  --ink-tertiary: rgba(26, 29, 33, 0.35);
+  --accent-green: #4A7A5E;
+  --accent-red: #B04545;
+  --hairline: rgba(26, 29, 33, 0.12);
+  --card-border: rgba(26, 29, 33, 0.08);
+  --shadow: 0 1px 2px rgba(26, 29, 33, 0.04), 0 10px 30px rgba(26, 29, 33, 0.05);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg-canvas: #161718;
+    --surface: #1E2022;
+    --ink-primary: #ECEDEF;
+    --ink-secondary: rgba(236, 237, 239, 0.7);
+    --ink-tertiary: rgba(236, 237, 239, 0.4);
+    --accent-green: #5A8A6E;
+    --accent-red: #C45757;
+    --hairline: rgba(236, 237, 239, 0.12);
+    --card-border: rgba(236, 237, 239, 0.08);
+    --shadow: none;
+  }
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text",
+               "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 17px;
+  font-weight: 400;
+  line-height: 1.6;
+  letter-spacing: -0.005em;
+  background: var(--bg-canvas);
+  color: var(--ink-primary);
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Layout container */
+.wrap {
+  max-width: 680px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* Top bar — identity left, context label right (echoes the app's header) */
+.topbar {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  padding-top: 64px;
+}
+
+.wordmark {
+  font-size: 17px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: var(--ink-primary);
+  text-decoration: none;
+}
+
+a.wordmark:hover {
+  text-decoration: none;
+}
+
+.topbar-label {
+  font-size: 14px;
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  color: var(--ink-tertiary);
+}
+
+/* Hero */
+.hero {
+  padding-top: 56px;
+}
+
+h1 {
+  font-size: 54px;
+  font-weight: 600;
+  line-height: 1.04;
+  letter-spacing: -0.03em;
+  margin: 0;
+  text-wrap: balance;
+}
+
+.subtitle {
+  font-size: 18px;
+  color: var(--ink-secondary);
+  margin: 18px 0 0;
+  max-width: 34ch;
+  text-wrap: pretty;
+}
+
+.stamp {
+  font-size: 14px;
+  color: var(--ink-tertiary);
+  margin: 18px 0 0;
+}
+
+/* Sections */
+section {
+  margin-top: 88px;
+}
+
+h2 {
+  font-size: 30px;
+  font-weight: 600;
+  line-height: 1.12;
+  letter-spacing: -0.02em;
+  margin: 0 0 20px;
+  text-wrap: balance;
+}
+
+h3 {
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 1.28;
+  letter-spacing: -0.01em;
+  margin: 34px 0 8px;
+}
+
+/* First question sits close to its section title */
+h2 + h3 {
+  margin-top: 4px;
+}
+
+p {
+  margin: 0 0 16px;
+  text-wrap: pretty;
+}
+
+p:last-child {
+  margin-bottom: 0;
+}
+
+/* Staccato lines — the app's blunt, fragment-on-its-own-line rhythm */
+.staccato p {
+  margin: 0 0 6px;
+  font-size: 21px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+/* The single-word "None." answer on the privacy page */
+.verdict {
+  font-size: 24px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  margin: 0 0 16px;
+}
+
+/* Plain list for the stored-data section */
+ul {
+  margin: 0 0 16px;
+  padding-left: 1.2em;
+}
+
+li {
+  margin: 0 0 6px;
+}
+
+/* Card surface — used sparingly, mirroring the app's nav cards */
+.card {
+  background: var(--surface);
+  border: 1px solid var(--card-border);
+  border-radius: 18px;
+  padding: 28px;
+  box-shadow: var(--shadow);
+}
+
+/* Links — subtle */
+a {
+  color: var(--ink-primary);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.card a {
+  font-weight: 600;
+  display: inline-block;
+  padding: 2px 0;
+}
+
+/* Footer */
+footer {
+  margin: 104px 0 72px;
+  padding-top: 24px;
+  border-top: 1px solid var(--hairline);
+  font-size: 14px;
+  color: var(--ink-tertiary);
+}
+
+footer a {
+  color: var(--ink-tertiary);
+}
+
+footer a:hover {
+  color: var(--ink-secondary);
+}
+
+/* Restrained page-load entrance — disabled for reduced-motion */
+@media (prefers-reduced-motion: no-preference) {
+  .topbar,
+  .hero,
+  section,
+  footer {
+    animation: rise 0.65s cubic-bezier(0.22, 0.61, 0.36, 1) both;
+  }
+
+  .hero { animation-delay: 0.05s; }
+  section:nth-of-type(1) { animation-delay: 0.10s; }
+  section:nth-of-type(2) { animation-delay: 0.15s; }
+  section:nth-of-type(3) { animation-delay: 0.20s; }
+  section:nth-of-type(4) { animation-delay: 0.25s; }
+  footer { animation-delay: 0.30s; }
+}
+
+@keyframes rise {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: none; }
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+  .wrap {
+    padding: 0 20px;
+  }
+
+  .topbar {
+    padding-top: 40px;
+  }
+
+  .hero {
+    padding-top: 40px;
+  }
+
+  h1 {
+    font-size: 36px;
+    letter-spacing: -0.02em;
+  }
+
+  h2 {
+    font-size: 25px;
+  }
+
+  h3 {
+    font-size: 19px;
+  }
+
+  section {
+    margin-top: 64px;
+  }
+
+  .staccato p {
+    font-size: 19px;
+  }
+
+  .card {
+    padding: 22px 20px;
+    border-radius: 16px;
+  }
+}
